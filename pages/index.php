@@ -2,13 +2,13 @@
 session_start();
 
 require '../config/connexion.php';
-require '../article.php';
+require '../includes/article.php';
 
 $database = new Database();
 $db = $database->getConnection();
 
 $post_obj = new Article($db);
-$posts = $post_obj->all();
+$posts = $post_obj->getHomePosts();
 ?>
 
 
@@ -109,6 +109,7 @@ $posts = $post_obj->all();
     <!-- footer  -->
     <?php include '../includes/footer.php'; ?>
 
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

@@ -63,7 +63,8 @@
 /* Responsive Styles */
 @media (max-width: 768px) {
     .auth_page {
-        margin: 50px 20px;
+        margin: 50px auto;
+        width: 90%;
         padding: 30px 20px;
     }
 }

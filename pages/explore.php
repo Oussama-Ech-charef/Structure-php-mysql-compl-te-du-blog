@@ -2,7 +2,7 @@
 session_start();
 
 require '../config/connexion.php';
-require '../article.php';
+require '../includes/article.php';
 
 $database = new Database();
 $db = $database->getConnection();
@@ -44,9 +44,6 @@ $posts = $post_obj->readAll();
                 <button class="filter_btn">Beaches</button>
                 <button class="filter_btn">Cafes</button>
                 <button class="filter_btn">Hotels</button>
-                <button class="filter_btn">Markets</button>
-                <button class="filter_btn">Museums</button>
-                <button class="filter_btn">Parks</button>
                 <button class="filter_btn">Restaurants</button>
                 <button class="filter_btn">Tourist Spots</button>
             </div>
@@ -97,6 +94,7 @@ $posts = $post_obj->readAll();
     <!-- footer  -->
     <?php include '../includes/footer.php'; ?>
 
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

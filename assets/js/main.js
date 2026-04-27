@@ -1,48 +1,40 @@
+// Main Site JavaScript
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    // 1. Variable Definitions (Selecting DOM elements)
-    const menuBtn = document.querySelector('#menu_btn');
-    const navLinks = document.querySelector('#nav_links');
-    const menuIcon = document.querySelector('#menu_icon');
-    const searchToggle = document.querySelector('#search_toggle_btn');
-    const searchBox = document.querySelector('#search_box');
-    const allLinks = document.querySelectorAll('.nav_link');
+    
+    // 1. Navigation Active Link Logic
+    const navLinks = document.querySelectorAll('.nav_link');
     const currentPath = window.location.pathname;
 
-    // 2. Mobile Menu Toggle (Open and Close)
-    menuBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('open');
-
-        // Toggle icon between (Bars) and (X)
-        const isOpen = navLinks.classList.contains('open');
-        menuIcon.classList.replace(isOpen ? 'fa-bars' : 'fa-xmark', isOpen ? 'fa-xmark' : 'fa-bars');
-    });
-
-    // 3. Search Box Toggle
-    searchToggle.addEventListener('click', () => {
-        searchBox.classList.toggle('open');
-        // Focus input if search box is open
-        if (searchBox.classList.contains('open')) {
-            document.querySelector('#search_input').focus();
-        }
-    });
-
-    // 4. Navbar Active Link matching the current page
-    allLinks.forEach(link => {
+    navLinks.forEach(link => {
         const linkHref = link.getAttribute('href');
+        
+        // Remove active class from all first
+        link.classList.remove('active');
 
-        // Check if link matches the current browser URL
-        if (linkHref !== "#" && currentPath.includes(linkHref)) {
+        // Check if current path ends with link href
+        if (currentPath.endsWith(linkHref)) {
             link.classList.add('active');
-        } else {
-            link.classList.remove('active');
-        }
-
-        // Special case for the Home page
-        if (linkHref === "index.php" && (currentPath.endsWith('/') || currentPath === "")) {
+        } 
+        // Special case for Home (index.php) when path might just be the folder
+        else if ((currentPath.endsWith('/') || currentPath.endsWith('pages/')) && linkHref === 'index.php') {
             link.classList.add('active');
         }
     });
 
+    // 2. Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#' || targetId.length <= 1) return;
+            
+            e.preventDefault();
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 });

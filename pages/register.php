@@ -1,5 +1,7 @@
 <?php
 session_start();
+require '../config/connexion.php';
+require '../includes/article.php';
 
 if (isset($_SESSION['username'])) {
     header("Location: index.php");
@@ -13,33 +15,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    // 1. Validate Name
+    // 1. Validation
     if (empty($name) || strlen($name) < 3) {
         $errors[] = "Name must be at least 3 characters long.";
     }
-
-    // 2. Validate Email
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Please enter a valid email address.";
     }
-
-    // 3. Validate Password
     if (strlen($password) < 6) {
         $errors[] = "Password must be at least 6 characters long.";
     }
 
-    // If no errors, save and redirect
+    // If no errors, save to Database
     if (empty($errors)) {
-        $_SESSION['reg_name'] = $name;
-        $_SESSION['reg_email'] = $email;
-        $_SESSION['reg_password'] = $password;
-
-        setcookie('reg_name', $name, time() + (86400 * 30), "/");
-        setcookie('reg_email', $email, time() + (86400 * 30), "/");
-        setcookie('reg_password', $password, time() + (86400 * 30), "/");
-
-        header("Location: login.php");
-        exit();
+        $database = new Database();
+        $db = $database->getConnection();
+        $post_obj = new Article($db);
+        
+        if ($post_obj->emailExists($email)) {
+            $errors[] = "This email is already registered.";
+        } else {
+            // Hash password for security
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            
+            if ($post_obj->createUser($name, $email, $hashed_password)) {
+                $_SESSION['success_msg'] = "Registration successful! Please login.";
+                header("Location: login.php");
+                exit();
+            } else {
+                $errors[] = "Something went wrong. Please try again.";
+            }
+        }
     }
 }
 ?>
@@ -48,7 +54,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Tangier Vibes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/header.css">
     <link rel="stylesheet" href="../assets/css/auth.css">
@@ -76,5 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <p class="auth_footer">Already have an account? <a href="login.php" class="auth_link">Login</a></p>
     </main>
 
+    <script src="../assets/js/main.js"></script>
 </body>
 </html>

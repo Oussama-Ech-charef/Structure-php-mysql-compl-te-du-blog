@@ -1,0 +1,240 @@
+.admin_container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.admin_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.admin_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin_table th, .admin_table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    max-width: 300px;
+    overflow-wrap: break-word;
+}
+
+.admin_table th {
+    background-color: #f8fafc;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.btn_add {
+    background-color: #2563eb;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn_add:hover {
+    background-color: #1d4ed8;
+}
+
+.btn_delete {
+    color: #ef4444;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.btn_delete:hover {
+    text-decoration: underline;
+}
+
+.msg_success {
+    background: #f0fdf4;
+    color: #166534;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.form_group { 
+    margin-bottom: 20px; 
+}
+
+.form_row {
+    display: flex;
+    gap: 20px;
+}
+
+.form_row .form_group {
+    flex: 1;
+}
+
+.form_group label { 
+    display: block; 
+    margin-bottom: 8px; 
+    font-weight: 600; 
+    color: #475569; 
+    font-size: 14px;
+}
+
+.form_input, .form_select, .form_textarea { 
+    width: 100%; 
+    padding: 12px; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.form_textarea { 
+    height: 150px; 
+    resize: vertical; 
+}
+
+.btn_submit { 
+    background: #2563eb; 
+    color: #fff; 
+    border: none; 
+    padding: 14px 24px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-weight: 600; 
+    width: 100%; 
+    transition: background 0.2s;
+}
+
+.btn_submit:hover { 
+    background: #1d4ed8; 
+}
+
+.msg_error { 
+    background: #fef2f2; 
+    color: #991b1b; 
+    padding: 10px; 
+    border-radius: 6px; 
+    margin-bottom: 20px; 
+}
+
+/* --- Dashboard Responsive Updates --- */
+
+@media (max-width: 768px) {
+    .admin_container {
+        margin: 20px 10px;
+        padding: 15px;
+    }
+
+    .admin_header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .admin_header div {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .admin_table th:nth-child(3), 
+    .admin_table td:nth-child(3) {
+        display: none; /* Hide Date on smaller tablets to save space */
+    }
+}
+
+@media (max-width: 480px) {
+    .admin_header h1 {
+        font-size: 20px;
+    }
+
+    .admin_header div {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .admin_header div a {
+        text-align: center;
+        margin: 0 !important;
+        padding: 12px;
+    }
+
+    /* Convert Table to Cards for Mobile */
+    .admin_table, 
+    .admin_table thead, 
+    .admin_table tbody, 
+    .admin_table th, 
+    .admin_table td, 
+    .admin_table tr {
+        display: block;
+    }
+
+    .admin_table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .admin_table tr {
+        border: 1px solid #e2e8f0;
+        margin-bottom: 15px;
+        border-radius: 12px;
+        padding: 15px;
+        background: #f8fafc;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    }
+
+    .admin_table td {
+        border: none;
+        position: relative;
+        padding-left: 45% !important;
+        text-align: right !important;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        max-width: none;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .admin_table td:last-child {
+        border-bottom: none;
+    }
+
+    .admin_table td:before {
+        position: absolute;
+        left: 0;
+        width: 40%;
+        white-space: nowrap;
+        font-weight: 600;
+        color: #64748b;
+        text-align: left;
+    }
+
+    .admin_table td:nth-of-type(1):before { content: "Title"; }
+    .admin_table td:nth-of-type(2):before { content: "Category"; }
+    .admin_table td:nth-of-type(3):before { content: "Date"; }
+    .admin_table td:nth-of-type(4):before { content: "Actions"; }
+
+    .admin_table td:nth-child(3) {
+        display: flex; /* Show Date again in card mode */
+    }
+
+    .btn_edit, .btn_delete {
+        padding: 6px 10px;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        font-size: 13px;
+    }
+}

@@ -4,7 +4,7 @@ session_start();
 
 
 require '../config/connexion.php';
-require '../article.php';
+require '../includes/article.php';
 
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
@@ -87,22 +87,7 @@ if (!$post) {
                         </p>
                     </div>
 
-                    <div class="post_section_location">
-                        <h3 class="location_area_title"><i class="fa-solid fa-location-dot"></i> Location</h3>
-                        <p class="location_address"><i class="fa-solid fa-location-arrow"
-                                style="font-size: 11px; margin-right: 4px; color: #94a3b8;"></i> Achakar, Cap Spartel,
-                            Tangier</p>
-                        <div class="map_box">
-                            <iframe class="map_static_img" src="" style="border:0;" allowfullscreen="" loading="lazy">
-                            </iframe>
-                            <div class="map_controls_overlay">
-                                <div class="map_zoom_btn">+</div>
-                                <div class="map_zoom_btn">−</div>
-                            </div>
-                            <div class="map_pin_label">Plage Achakar</div>
-                            <div class="map_attribution_overlay">Leaflet | © OpenStreetMap</div>
-                        </div>
-                    </div>
+
 
                     <div class="post_action_btns">
                         <a href="explore.php" class="btn_back_explore"><i class="fa-solid fa-arrow-left"></i>
@@ -200,6 +185,7 @@ if (!$post) {
         </div>
     </main>
 
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

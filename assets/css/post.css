@@ -54,6 +54,7 @@
     z-index: 1;
     max-width: 800;
     padding: 0 20px;
+    margin-bottom: -100px
 }
 .post_badge {
     background-color: #2563eb;
@@ -75,6 +76,8 @@
     letter-spacing: -2px;
     line-height: 1.1;
     color: #ffffff;
+    overflow-wrap: break-word; /* Fix for long titles */
+    word-wrap: break-word;     /* Fix for long titles */
 }
 
 .post_meta {
@@ -107,6 +110,7 @@
     grid-template-columns: 1fr 360px; 
     gap: 60px; 
     align-items: start;
+    min-width: 0; /* Important for grid items overflow */
 }
 
 
@@ -120,6 +124,7 @@
     line-height: 1.8;
     color: var(--color_gray);
     margin-bottom: 50px;
+    word-break: break-all; /* Aggressive fix for long strings */
 }
 
 .intro_text {
@@ -130,95 +135,12 @@
     padding-left: 20px;
     border-left: 4px solid var(--color_primary); 
     line-height: 1.6;
+    word-break: break-all; /* Aggressive fix for long strings */
 }
 .post_article_body p {
     margin-bottom: 20px;
 }
-.post_section_location {
-    background-color: #ffffff;
-    border-radius: 16px;
-    padding: 32px;
-    margin-bottom: 50px;
-    border: 1px solid #eef2f6;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-}
 
-.location_area_title {
-    font-size: 18px;
-    font-weight: 700;
-    color: #2563eb;
-    margin-bottom: 8px; 
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.location_address {
-    font-size: 13px;
-    color: #64748b;
-    margin-bottom: 24px;
-}
-
-.map_box {
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    height: 350px; 
-}
-
-.map_static_img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.map_controls_overlay {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    z-index: 2;
-}
-
-.map_zoom_btn {
-    width: 30px;
-    height: 30px;
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    cursor: pointer;
-}
-.map_attribution_overlay {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.7);
-    padding: 2px 8px;
-    font-size: 15px;
-    color: #333;
-    z-index: 2;
-}
-
-.map_pin_label {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #ffffff;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-weight: 700;
-    font-size: 13px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 3;
-}
 
 .post_action_btns {
     display: flex;
@@ -577,7 +499,7 @@
         font-size: 32px;
     }
     .post_meta {
-        flex-direction: column;
+        
         gap: 10px;
     }
     .post_action_btns {
